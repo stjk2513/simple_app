@@ -23,6 +23,25 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <div style="padding: 10px; background: #f0f0f0; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center;">
+        <span>Logged in as: <%= current_user.email %></span>
+        <%= button_to "Logout", logout_path, method: :delete, style: "padding: 5px 15px; cursor: pointer;" %>
+      </div>
+    <% end %>
+
+    <% if flash[:notice] %>
+      <div style="color: green; padding: 10px; background: #e8f5e9; margin: 10px;">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div style="color: red; padding: 10px; background: #ffebee; margin: 10px;">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

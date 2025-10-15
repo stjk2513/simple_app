@@ -1,0 +1,37 @@
+<div style="max-width: 400px; margin: 50px auto;">
+  <h1>Sign Up</h1>
+
+  <% if @user.errors.any? %>
+    <div style="color: red; margin-bottom: 20px;">
+      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this account from being saved:</h3>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @user, url: signup_path, method: :post, local: true do |f| %>
+    <div style="margin-bottom: 15px;">
+      <%= f.label :email, style: "display: block; margin-bottom: 5px;" %>
+      <%= f.email_field :email, required: true, style: "width: 100%; padding: 8px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :password, style: "display: block; margin-bottom: 5px;" %>
+      <%= f.password_field :password, required: true, style: "width: 100%; padding: 8px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.label :password_confirmation, "Confirm Password", style: "display: block; margin-bottom: 5px;" %>
+      <%= f.password_field :password_confirmation, required: true, style: "width: 100%; padding: 8px;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= f.submit "Sign Up", style: "padding: 10px 20px; cursor: pointer;" %>
+    </div>
+  <% end %>
+
+  <p>Already have an account? <%= link_to "Log in", login_path %></p>
+</div>
